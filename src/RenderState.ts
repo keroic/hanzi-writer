@@ -24,6 +24,7 @@ export type RenderStateObject = {
     drawingWidth: number;
     drawingColor: ColorObject;
     strokeColor: ColorObject;
+    strokeColors: (ColorObject | null)[] | null;
     outlineColor: ColorObject;
     radicalColor: ColorObject;
     highlightColor: ColorObject;
@@ -61,6 +62,7 @@ type MutationChain = {
 
 export type RenderStateOptions = {
   strokeColor: string;
+  strokeColors?: (string | null)[] | null;
   radicalColor: string | null;
   highlightColor: string;
   outlineColor: string;
@@ -91,6 +93,9 @@ export default class RenderState {
         drawingWidth: options.drawingWidth,
         drawingColor: colorStringToVals(options.drawingColor),
         strokeColor: colorStringToVals(options.strokeColor),
+        strokeColors: options.strokeColors
+          ? options.strokeColors.map((c) => (c ? colorStringToVals(c) : null))
+          : null,
         outlineColor: colorStringToVals(options.outlineColor),
         radicalColor: colorStringToVals(options.radicalColor || options.strokeColor),
         highlightColor: colorStringToVals(options.highlightColor),

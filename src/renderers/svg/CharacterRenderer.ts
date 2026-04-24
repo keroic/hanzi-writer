@@ -9,6 +9,7 @@ type SvgCharacterRenderProps = {
   opacity: number;
   strokes: Record<number, StrokeRenderState>;
   strokeColor: ColorObject;
+  strokeColors?: (ColorObject | null)[] | null;
   radicalColor?: ColorObject | null;
 };
 
@@ -35,7 +36,7 @@ export default class CharacterRenderer {
     if (props === this._oldProps || !this._group) {
       return;
     }
-    const { opacity, strokes, strokeColor, radicalColor = null } = props;
+    const { opacity, strokes, strokeColor, strokeColors, radicalColor = null } = props;
     if (opacity !== this._oldProps?.opacity) {
       this._group.style.opacity = opacity.toString();
       // MS browsers seem to have a bug where if SVG is set to display:none, it sometimes breaks.
@@ -52,6 +53,7 @@ export default class CharacterRenderer {
     const colorsChanged =
       !this._oldProps ||
       strokeColor !== this._oldProps.strokeColor ||
+      strokeColors !== this._oldProps.strokeColors ||
       radicalColor !== this._oldProps.radicalColor;
 
     if (colorsChanged || strokes !== this._oldProps?.strokes) {
@@ -63,9 +65,10 @@ export default class CharacterRenderer {
         ) {
           continue;
         }
+        const perStrokeColor = strokeColors?.[i] ?? null;
         this._strokeRenderers[i].render({
-          strokeColor,
-          radicalColor,
+          strokeColor: perStrokeColor ?? strokeColor,
+          radicalColor: perStrokeColor ? null : radicalColor,
           opacity: strokes[i].opacity,
           displayPortion: strokes[i].displayPortion,
         });

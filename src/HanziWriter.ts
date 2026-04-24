@@ -391,6 +391,27 @@ export default class HanziWriter {
     );
   }
 
+  setStrokeColors(
+    strokeColors: (string | null)[] | null,
+    options: {
+      onComplete?: OnCompleteFunction;
+    } = {},
+  ) {
+    this._options.strokeColors = strokeColors;
+    const mappedColors = strokeColors
+      ? strokeColors.map((c) => (c ? colorStringToVals(c) : null))
+      : null;
+
+    return this._withData(() =>
+      this._renderState
+        ?.run(characterActions.updateStrokeColors(mappedColors))
+        .then((res) => {
+          options.onComplete?.(res);
+          return res;
+        }),
+    );
+  }
+
   quiz(quizOptions: Partial<QuizOptions> = {}) {
     return this._withData(async () => {
       if (this._character && this._renderState && this._positioner) {

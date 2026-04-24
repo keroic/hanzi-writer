@@ -52,6 +52,7 @@ export default class HanziWriterRenderer
     const {
       outlineColor,
       strokeColor,
+      strokeColors,
       radicalColor,
       highlightColor,
       drawingColor,
@@ -68,6 +69,7 @@ export default class HanziWriterRenderer
         opacity: main.opacity,
         strokes: main.strokes,
         strokeColor: strokeColor,
+        strokeColors: strokeColors,
         radicalColor: radicalColor,
       });
       this._highlightCharRenderer.render(ctx, {

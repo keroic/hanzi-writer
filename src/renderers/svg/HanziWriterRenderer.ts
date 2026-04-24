@@ -49,6 +49,7 @@ export default class HanziWriterRenderer
       radicalColor,
       highlightColor,
       strokeColor,
+      strokeColors,
       drawingWidth,
       drawingColor,
     } = props.options;
@@ -63,6 +64,7 @@ export default class HanziWriterRenderer
       opacity: main.opacity,
       strokes: main.strokes,
       strokeColor,
+      strokeColors,
       radicalColor: radicalColor,
     });
 

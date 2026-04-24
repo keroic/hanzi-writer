@@ -23,6 +23,8 @@ export type ColorObject = { r: number; g: number; b: number; a: number };
 export type ColorOptions = {
   /** (Hex string, Default: "#555"). The color to draw each stroke. */
   strokeColor: string;
+  /** (Hex string array, Default: null). Per-stroke color overrides. Each entry corresponds to a stroke by index. Use null for a stroke to fall back to `strokeColor`. */
+  strokeColors: (string | null)[] | null;
   /** (Hex string, Default: null). The color to draw the radical in the stroke, if radical data is present. Radicals will be drawn the same color as other strokes if this is not set. */
   radicalColor: string | null;
   /** (Hex string, Default: "#AAF"). The color to use for highlighting in quizzes. */

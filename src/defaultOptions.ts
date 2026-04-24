@@ -27,6 +27,7 @@ const defaultOptions: HanziWriterOptions = {
   // colors
 
   strokeColor: '#555',
+  strokeColors: null,
   radicalColor: null,
   highlightColor: '#AAF',
   outlineColor: '#DDD',

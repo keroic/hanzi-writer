@@ -58,6 +58,12 @@ export const updateColor = (
   return [new Mutation(`options.${colorName}`, colorVal, { duration })];
 };
 
+export const updateStrokeColors = (
+  strokeColors: (ColorObject | null)[] | null,
+): GenericMutation[] => {
+  return [new Mutation('options.strokeColors', strokeColors, { duration: 0 })];
+};
+
 export const highlightStroke = (
   stroke: Stroke,
   color: ColorObject | null,

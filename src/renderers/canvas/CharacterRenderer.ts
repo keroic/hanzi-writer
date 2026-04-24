@@ -16,17 +16,19 @@ export default class CharacterRenderer {
       opacity: number;
       strokes: Record<number, StrokeRenderState>;
       strokeColor: ColorObject;
+      strokeColors?: (ColorObject | null)[] | null;
       radicalColor?: ColorObject | null;
     },
   ) {
     if (props.opacity < 0.05) return;
 
-    const { opacity, strokeColor, radicalColor, strokes } = props;
+    const { opacity, strokeColor, strokeColors, radicalColor, strokes } = props;
 
     for (let i = 0; i < this._strokeRenderers.length; i++) {
+      const perStrokeColor = strokeColors?.[i] ?? null;
       this._strokeRenderers[i].render(ctx, {
-        strokeColor,
-        radicalColor,
+        strokeColor: perStrokeColor ?? strokeColor,
+        radicalColor: perStrokeColor ? null : radicalColor,
         opacity: strokes[i].opacity * opacity,
         displayPortion: strokes[i].displayPortion || 0,
       });
