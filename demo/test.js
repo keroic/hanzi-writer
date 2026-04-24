@@ -23,7 +23,7 @@ function updateCharacter() {
   });
   isCharVisible = true;
   isOutlineVisible = true;
-  var colors = ['#e74c3c', '#e67e22', '#f1c40f', '#2ecc71', '#1abc9c', '#3498db', '#9b59b6'];
+  var colors = ['#e74c3c', '#e67e22', '#f1c40f', '#015624', '#1abc9c', '#3498db', '#9b59b6'];
   writer.getCharacterData().then(function (char) {
     var strokeColors = char.strokes.map(function (_, i) {
       return colors[i % colors.length];
